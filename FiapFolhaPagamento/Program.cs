@@ -40,6 +40,16 @@
 
         public decimal CalcularDesconto(decimal salarioBruto)
         {
+            decimal desconto = 0m;
+
+            foreach (var item in Faixas)
+            {
+                if (salarioBruto >= item.Piso && salarioBruto <= item.Teto)
+                {
+                    desconto = salarioBruto * item.Aliquota / 100;
+                    return desconto;
+                }
+            }
             return 0;
         }
     }
