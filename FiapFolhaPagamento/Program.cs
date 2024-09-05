@@ -24,7 +24,16 @@
         {
             if (valor > Teto)
                 return true;
-            return valor >= Teto;
+            return valor >= Piso;
+        }
+        public decimal ObterValorFaixa(decimal salario)
+        {
+            var valorFaixaAnterior = Aliquota > 7.5m ? Piso - 0.01m :  Piso;
+
+            if(salario > Teto)
+                return Teto - valorFaixaAnterior;
+            return salario - valorFaixaAnterior;
+            
         }
     }
 
@@ -49,7 +58,7 @@
 
                 foreach (var item in Faixas)
                 {
-                    if (salarioBruto >= item.Piso && salarioBruto <= item.Teto)
+                    if (item.ContemValor(salarioBruto))
                     {
                         desconto = salarioBruto * item.Aliquota / 100;
                         return desconto;

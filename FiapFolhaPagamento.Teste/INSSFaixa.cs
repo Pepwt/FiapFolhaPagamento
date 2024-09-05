@@ -17,7 +17,20 @@ namespace FiapFolhaPagamento.Teste
                 Teto = 1422,
             };
             Assert.True(faixa.ContemValor(1200));
+        }
+        [Fact]
+        public void Deve_Obter_1412()
+        {
+            var faixa = new INSSFaixa
+            {
+                Piso = 0,
+                Teto = 1412,
+                Aliquota = 7.5m
+            };
+            var resultado = faixa.ObterValorFaixa(1412);
+            const decimal esperado = 1412m;
 
+            Assert.Equal(esperado, resultado);
         }
     }
 
